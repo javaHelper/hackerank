@@ -2,7 +2,7 @@ package org.example.algorithms.implementation;
 
 import java.math.BigInteger;
 
-public interface TaumAndBday {
+public class TaumAndBday {
     public static long taumBday(int b, int w, int bc, int wc, int z) {
         BigInteger c = BigInteger.valueOf(b);
         BigInteger d = BigInteger.valueOf(Math.min(bc, wc + z));

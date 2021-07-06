@@ -1,4 +1,4 @@
-package org.example;
+package org.example.algorithms.implementation;
 
 public class BeautifulDaysAtTheMovies {
     static int beautifulDays(int i, int j, int k) {
