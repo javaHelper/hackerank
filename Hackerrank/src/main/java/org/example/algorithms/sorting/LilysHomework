@@ -1,0 +1,64 @@
+package org.example.algorithms.gametheory.sorting;
+
+import java.util.*;
+
+public class LilysHomework {
+    public static void main(String[] args) {
+        System.out.println(lilysHomework(Arrays.asList(2, 5, 3, 1)));
+    }
+
+    public static int lilysHomework(List<Integer> a) {
+        int[] arr = a.stream().mapToInt(Integer::intValue).toArray();
+
+        int[] copyArr = arr.clone();
+        Map<Integer, Integer> sortedArrMap = new TreeMap<>();
+        for (int i = 0; i < copyArr.length; i++) {
+            sortedArrMap.put(copyArr[i], i);
+        }
+
+        int left = 0;
+        int sortedAns = 0;
+        Iterator<Integer> sortedArrMapIterator = sortedArrMap.keySet().iterator();
+        while (sortedArrMapIterator.hasNext()) {
+            int idx = sortedArrMap.get(sortedArrMapIterator.next());
+            if (idx != left) {
+                int temp = copyArr[idx];
+                copyArr[idx] = copyArr[left];
+                sortedArrMap.put(copyArr[left], idx);
+                copyArr[left] = temp;
+                sortedAns++;
+            }
+            left++;
+        }
+
+
+        copyArr = arr.clone();
+        Map<Integer, Integer> sortedDescArrMap = new TreeMap<>(Collections.reverseOrder());
+        for (int i = 0; i < copyArr.length; i++) {
+            sortedDescArrMap.put(copyArr[i], i);
+        }
+
+        left = 0;
+        int sortedDescAns = 0;
+        Iterator<Integer> sortedDescArrMapIterator = sortedDescArrMap.keySet().iterator();
+        while (sortedDescArrMapIterator.hasNext()) {
+            int idx = sortedDescArrMap.get(sortedDescArrMapIterator.next());
+            if (idx != left) {
+                int temp = copyArr[idx];
+                copyArr[idx] = copyArr[left];
+                sortedDescArrMap.put(copyArr[left], idx);
+                copyArr[left] = temp;
+                sortedDescAns++;
+            }
+            left++;
+        }
+
+        return Math.min(sortedAns, sortedDescAns);
+    }
+
+    private static void swap(int[] arr, int i, int j) {
+        int tmp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = tmp;
+    }
+}
