@@ -1,0 +1,9 @@
+public class TowerBreakers {
+    public static void main(String[] args) {
+        System.out.println(towerBreakers(2, 2));
+    }
+
+    public static int towerBreakers(int n, int m) {
+        return (n % 2 == 0 || m == 1) ? 2 : 1;
+    }
+}
