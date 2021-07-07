@@ -1,0 +1,17 @@
+package org.example.interviewpreparationkit.misc;
+
+public class FlippingBits {
+    public static void main(String[] args) {
+        System.out.println(flippingBits(3));
+    }
+
+
+    public static long flippingBits(long n) {
+        long number = 0;
+        long unsignedNumber;
+        
+        number = ~number;
+        unsignedNumber = number & 0xffffffffL;
+        return unsignedNumber;
+    }
+}
