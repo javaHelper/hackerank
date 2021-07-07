@@ -1,0 +1,36 @@
+package org.example.algorithms.gametheory.sorting;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+public class ClosestNumbers {
+    public static void main(String[] args) {
+        System.out.println(closestNumbers(Arrays.asList(5, 2, 3, 4, 1)));
+    }
+
+    public static List<Integer> closestNumbers(List<Integer> a) {
+        int[] arr = a.stream().mapToInt(Integer::intValue).toArray();
+        Arrays.sort(arr);
+
+        int min = Math.abs(arr[0] - arr[1]);
+        int[] b = new int[arr.length - 1];
+
+        for (int i = 0; i < arr.length - 1; i++) {
+            int x = Math.abs(arr[i] - arr[i + 1]);
+            b[i] = x;
+            if (x < min) {
+                min = x;
+            }
+        }
+
+        List<Integer> r = new ArrayList<>();
+        for (int i = 0; i < b.length; i++) {
+            if (b[i] == min) {
+                r.add(arr[i]);
+                r.add(arr[i + 1]);
+            }
+        }
+        return r;
+    }
+}
