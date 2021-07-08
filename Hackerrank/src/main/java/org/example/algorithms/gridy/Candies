@@ -1,0 +1,43 @@
+package org.example.algorithms.greedy;
+
+import java.math.BigInteger;
+import java.util.Arrays;
+import java.util.List;
+
+public class Candies {
+    public static long candies(int n, List<Integer> a) {
+        int[] arr = a.stream().mapToInt(Integer::intValue).toArray();
+
+        int[] cache = new int[arr.length];
+        cache[0] = 1;
+
+        for (int i = 1; i < arr.length; i++) {
+            if (arr[i - 1] < arr[i]) {
+                cache[i] = cache[i - 1] + 1;
+            }
+
+            if (arr[i - 1] >= arr[i]) {
+                cache[i] = 1;
+            }
+        }
+
+        for (int i = arr.length - 2; i >= 0; i--) {
+            if (arr[i] > arr[i + 1]) {
+                if (cache[i] <= cache[i + 1]) {
+                    cache[i] = cache[i + 1] + 1;
+                }
+            }
+        }
+
+        BigInteger sum = BigInteger.valueOf(0);
+        for (int i = 0; i < cache.length; i++) {
+            sum = sum.add(BigInteger.valueOf(cache[i]));
+        }
+
+        return sum.longValue();
+    }
+
+    public static void main(String[] args) {
+        System.out.println(candies(3, Arrays.asList(1, 2, 2)));
+    }
+}
