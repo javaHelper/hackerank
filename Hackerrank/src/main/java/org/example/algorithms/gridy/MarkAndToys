@@ -1,0 +1,28 @@
+package org.example.algorithms.greedy;
+
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
+public class MarkAndToys {
+    public static void main(String[] args) {
+        System.out.println(maximumToys(Arrays.asList(1, 2, 3, 4), 7));
+    }
+
+    public static int maximumToys(List<Integer> prices, int k) {
+        Collections.sort(prices);
+        int[] p = prices.stream().mapToInt(Integer::intValue).toArray();
+        int totalToys = 0;
+        int totalToysPrice = 0;
+
+        for (int i = 0; i < p.length - 1; i++) {
+            if (k >= totalToysPrice) {
+                totalToysPrice += p[i];
+                if (k >= totalToysPrice) {
+                    totalToys++;
+                }
+            }
+        }
+        return totalToys;
+    }
+}
