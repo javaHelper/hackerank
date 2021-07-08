@@ -1,0 +1,29 @@
+package org.example.algorithms.greedy;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
+public class PriyankaAndToys {
+    public static void main(String[] args) {
+        System.out.println(toys(Arrays.asList(1, 2, 3, 21, 7, 12, 14, 21)));
+    }
+
+    public static int toys(List<Integer> w) {
+        Collections.sort(w);
+        int containerCount = 0, min = Integer.MIN_VALUE;
+        List<Integer> container = new ArrayList<>();
+        for (int itemWeight : w) {
+            if (itemWeight > (min + 4)) {
+                container.clear();
+                container.add(itemWeight);
+                min = itemWeight;
+                containerCount++;
+            } else {
+                container.add(itemWeight);
+            }
+        }
+        return containerCount;
+    }
+}
