@@ -1,0 +1,26 @@
+package org.example.algorithms.greedy;
+
+public class SherlockAndTheBeast {
+    public static void main(String[] args) {
+        decentNumber(4);
+    }
+
+    static void decentNumber(int n) {
+        int z = n;
+        while (z % 3 != 0) {
+            z -= 5;
+        }
+        if (z < 0) {
+            System.out.println("-1");
+        } else {
+            StringBuilder result = new StringBuilder();
+            for (int i = 0; i < z; i++) {
+                result.append(5);
+            }
+            for (int i = 0; i < n - z; i++) {
+                result.append(3);
+            }
+            System.out.println(result.toString());
+        }
+    }
+}
