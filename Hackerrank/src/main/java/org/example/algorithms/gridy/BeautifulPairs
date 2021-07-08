@@ -1,0 +1,43 @@
+package org.example.algorithms.greedy;
+
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
+public class BeautifulPairs {
+    public static void main(String[] args) {
+        System.out.println(beautifulPairs(Arrays.asList(1, 2, 3, 4), Arrays.asList(1, 2, 3, 3)));
+    }
+
+    public static int beautifulPairs(List<Integer> A, List<Integer> B) {
+        Collections.sort(A);
+        Collections.sort(B);
+
+        int[] aa = A.stream().mapToInt(Integer::intValue).toArray();
+        int[] bb = B.stream().mapToInt(Integer::intValue).toArray();
+
+        int i = 0;
+        int j = 0;
+        int counter = 0;
+        while (i < aa.length && j < bb.length) {
+            if (aa[i] == bb[j]) {
+                counter++;
+                i++;
+                j++;
+            } else if (aa[i] < bb[j]) {
+                i++;
+            } else {
+                j++;
+            }
+        }
+
+        if (counter < aa.length) {
+            return counter + 1;
+        }
+
+        if (counter == aa.length) {
+            return counter - 1;
+        }
+        return counter;
+    }
+}
