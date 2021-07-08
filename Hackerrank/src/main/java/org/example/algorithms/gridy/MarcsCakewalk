@@ -1,0 +1,25 @@
+package org.example.algorithms.greedy;
+
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
+public class MarcsCakewalk {
+    public static void main(String[] args) {
+        System.out.println(marcsCakewalk(Arrays.asList(7, 4, 9, 6)));
+    }
+
+    public static long marcsCakewalk(List<Integer> c) {
+        Collections.sort(c, Collections.reverseOrder());
+
+        int[] calories = c.stream().mapToInt(Integer::intValue).toArray();
+
+        long multiplier = 1;
+        long miles = 0;
+        for (int j = 0; j < calories.length; j++) {
+            miles += calories[j] * multiplier;
+            multiplier *= 2;
+        }
+        return miles;
+    }
+}
