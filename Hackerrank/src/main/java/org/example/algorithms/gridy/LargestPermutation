@@ -1,0 +1,36 @@
+package org.example.algorithms.greedy;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+public class LargestPermutation {
+    public static void main(String[] args) {
+        System.out.println(largestPermutation(1, Arrays.asList(1, 2, 3, 4)));
+    }
+
+    public static List<Integer> largestPermutation(int k, List<Integer> arr) {
+        int[] a = arr.stream().mapToInt(Integer::intValue).toArray();
+
+        for (int i = 0; i < k && i < a.length; i++) {
+            int j;
+            for (j = i; j < a.length; j++) {
+                if (a[j] == a.length - i) {
+                    break;
+                }
+            }
+            if (j != i) {
+                int temp = a[j];
+                a[j] = a[i];
+                a[i] = temp;
+            } else {
+                k++;
+            }
+        }
+        List<Integer> r = new ArrayList<>();
+        for (int i = 0; i < a.length; i++) {
+            r.add(a[i]);
+        }
+        return r;
+    }
+}
