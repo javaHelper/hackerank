@@ -1,0 +1,33 @@
+package org.example.algorithms.greedy;
+
+import java.util.Collections;
+import java.util.List;
+import java.util.stream.Collectors;
+
+public class LuckBalance {
+    public static void main(String[] args) {
+
+    }
+
+    public static int luckBalance(int k, List<List<Integer>> contests) {
+        final int nonImportantSum = contests.stream().filter(it -> it.get(1).equals(0)).map(it -> it.get(0)).mapToInt(Integer::intValue).sum();
+        List<Integer> importantPairs = contests
+                .stream()
+                .filter(it -> it.get(1).equals(1))
+                .map(it -> it.get(0))
+                .collect(Collectors.toList());
+        Collections.sort(importantPairs, Collections.reverseOrder());
+
+        final int lostImportantSum = importantPairs.subList(0, Math.min(k, importantPairs.size()))
+                .stream()
+                .mapToInt(Integer::intValue)
+                .sum();
+        final int wonImportantSum = importantPairs.subList(Math.min(k, importantPairs.size()), importantPairs.size())
+                .stream()
+                .mapToInt(Integer::intValue)
+                .sum();
+
+
+        return nonImportantSum + lostImportantSum - wonImportantSum;
+    }
+}
