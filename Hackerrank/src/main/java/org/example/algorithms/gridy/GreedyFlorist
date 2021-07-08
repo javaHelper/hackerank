@@ -1,0 +1,21 @@
+package org.example.algorithms.greedy;
+
+import java.util.Arrays;
+
+public class GreedyFlorist {
+    public static void main(String[] args) {
+        System.out.println(getMinimumCost(2, new int[]{2, 5, 6}));
+    }
+
+    static int getMinimumCost(int k, int[] c) {
+        Arrays.sort(c);
+        int cost = 0;
+        int counter = 1;
+        for (int i = c.length - 1; i >= 0; counter++) {
+            for (int j = 0; j < k && i >= 0; j++, i--) {
+                cost += c[i] * counter;
+            }
+        }
+        return cost;
+    }
+}
