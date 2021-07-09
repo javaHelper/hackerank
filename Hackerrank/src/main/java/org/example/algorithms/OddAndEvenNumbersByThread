@@ -1,0 +1,49 @@
+package org.example.string;
+
+public class OddAndEvenNumbersByThread {
+    static int N;
+    int counter = 1;
+
+    public static void main(String[] args) {
+        OddAndEvenNumbersByThread t = new OddAndEvenNumbersByThread();
+        N = 10;
+        Thread t1 = new Thread(() -> t.printEvenNumber());
+        Thread t2 = new Thread(() -> t.printOddNumber());
+        t1.start();
+        t2.start();
+    }
+
+    private void printOddNumber() {
+        synchronized (this) {
+            while (counter < N) {
+                while (counter % 2 != 0) {
+                    try {
+                        wait();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+                System.out.println(counter + " ");
+                counter++;
+                notify();
+            }
+        }
+    }
+
+    private void printEvenNumber() {
+        synchronized (this) {
+            while (counter < N) {
+                while (counter % 2 == 0) {
+                    try {
+                        wait();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+                System.out.println(counter + " ");
+                counter++;
+                notify();
+            }
+        }
+    }
+}
